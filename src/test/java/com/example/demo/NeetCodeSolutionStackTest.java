@@ -3,6 +3,8 @@ package com.example.demo;
 import com.example.demo.NeetCodeSolutionsStack.MinStack;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class NeetCodeSolutionStackTest {
     NeetCodeSolutionsStack neetCodeSolutionsStack = new NeetCodeSolutionsStack();
 
@@ -29,5 +31,12 @@ public class NeetCodeSolutionStackTest {
     @Test
     public void sanityGenerateParenthesis() {
         System.out.println(neetCodeSolutionsStack.generateParenthesis(3));
+    }
+
+    @Test
+    public void sanityAsteroidCollison() {
+        System.out.println(Arrays.toString(neetCodeSolutionsStack.asteroidCollision(new int[]{10,2,-5})));
+
+        System.out.println(Arrays.toString(neetCodeSolutionsStack.asteroidCollision(new int[]{-5,2,10})));
     }
 }

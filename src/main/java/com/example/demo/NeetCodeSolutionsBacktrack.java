@@ -96,4 +96,75 @@ public class NeetCodeSolutionsBacktrack {
         }
         dfsSubsetWithDuplicate(nums,subset,output,i+1);
     }
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<Integer> sublist = new ArrayList<>();
+        List<List<Integer>> output = new ArrayList<>();
+        backTrackCombinationSum2(candidates,0,sublist,target,output);
+        return output;
+    }
+
+    private void backTrackCombinationSum2(int[] candidates, int pos, List<Integer> sublist, int target, List<List<Integer>> output) {
+        int sum = sublist.stream().mapToInt(Integer::intValue).sum();
+        if(sum == target) {
+            output.add(new ArrayList<>(sublist));
+            return;
+        }
+        if(sum > target) {
+            return;
+        }
+        int prev = -1;
+        for(int i = pos; i<candidates.length; i++) {
+            if(candidates[i] == prev) {
+                continue;
+            }
+            sublist.add(candidates[i]);
+            backTrackCombinationSum2(candidates, i + 1, sublist, target, output);
+            sublist.remove(sublist.size() - 1);
+            prev = candidates[i];
+        }
+    }
+
+    public boolean exist(char[][] board, String word) {
+        int rows = board.length;
+        int columns = board[0].length;
+        int index=0;
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<columns; j++) {
+                if(board[i][j] == word.charAt(index)) {
+                    boolean isWordFound = performDFS(board,word,i,j,index);
+                    if(isWordFound) {
+                        return true;
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
+    private boolean performDFS(char[][] board, String word, int i, int j, int index) {
+
+        if(i<0 || i>=board.length || j<0 || j>=board[0].length || board[i][j] != word.charAt(index)) {
+            return false;
+        }
+
+        if(index == word.length()-1) {
+            return true;
+        }
+
+        char prevChar = board[i][j];
+        board[i][j] = '?';
+
+        if(performDFS(board,word,i-1,j,index+1) ||
+                performDFS(board,word,i+1,j,index+1) ||
+                performDFS(board,word,i,j-1,index+1) ||
+                performDFS(board,word,i,j+1,index+1)
+        ) {
+            return true;
+        }
+        board[i][j] = prevChar;
+        return false;
+    }
 }

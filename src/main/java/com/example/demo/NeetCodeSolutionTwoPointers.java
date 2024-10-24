@@ -50,4 +50,102 @@ public class NeetCodeSolutionTwoPointers {
         }
         return res;
     }
+
+    public void moveZeroes(int[] nums) {
+        int currIndex=-1;
+        boolean isFirstZero=true;
+
+        for(int i=0; i< nums.length; i++) {
+            if(nums[i]==0 && isFirstZero) {
+                currIndex=i;
+                isFirstZero=false;
+            }
+            else if(nums[i]!=0 && currIndex>-1) {
+                nums[currIndex]=nums[i];
+                currIndex++;
+            }
+        }
+        if(currIndex > 0) {
+            for (int i = currIndex; i < nums.length; i++) {
+                nums[i] = 0;
+            }
+        }
+
+    }
+
+    public boolean isSubsequence(String s, String t) {
+        if(s.length()==0) {
+            return true;
+        }
+        int sIndex=0;
+        for(int i=0;i<t.length() && sIndex<s.length();i++) {
+            if(t.charAt(i) == s.charAt(sIndex)) {
+                sIndex++;
+            }
+        }
+        return sIndex==s.length();
+    }
+
+    public int maxArea(int[] height) {
+        int left=0;
+        int right= height.length-1;
+        int maxArea=0;
+        while(left<right) {
+            int length = height[left]<height[right]? height[left] : height[right];
+            int area = length*(right-left);
+            if(area > maxArea) {
+                maxArea = area;
+            }
+            if(height[left] > height[right]) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return maxArea;
+    }
+
+    public int maxOperations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int left=0;
+        int right= nums.length-1;
+        int count=0;
+
+        while(left<right) {
+            if(nums[left]+nums[right] == k) {
+                left++;
+                right--;
+                count++;
+            }
+            else if(nums[left] + nums[right] > k) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return count;
+    }
+
+    public String reverseVowels(String s) {
+        char[] str = s.toCharArray();
+        int left = 0;
+        int right= s.length()-1;
+        String vowels = "aAeEiIoOuU";
+        while(left<right) {
+            if(vowels.indexOf(str[left])!=-1 && vowels.indexOf(str[right])!=-1) {
+                char temp =  str[left];
+                str[left]=str[right];
+                str[right]=temp;
+                left++;
+                right--;
+            }
+            else if(vowels.indexOf(str[left])!=-1) {
+                right--;
+            }
+            else {
+                left++;
+            }
+        }
+        return new String(str);
+    }
 }

@@ -19,4 +19,14 @@ public class NeetCodeSolutionsBacktrackTest {
     public void sanitySubset() {
         System.out.println(neetCodeSolutionsBacktrack.subsetsWithDup(new int[]{1,2,1}));
     }
+
+    @Test
+    public void sanityCombinationSum2() {
+        System.out.println(neetCodeSolutionsBacktrack.combinationSum2(new int[]{1,2,3,4,5}, 7));
+    }
+
+    @Test
+    public void sanityGridSearch() {
+        System.out.println(neetCodeSolutionsBacktrack.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCCED"));
+    }
 }

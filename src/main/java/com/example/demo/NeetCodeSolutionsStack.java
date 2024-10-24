@@ -94,4 +94,63 @@ public class NeetCodeSolutionsStack {
             output.add(s);
         }
     }
+
+    public int[] asteroidCollision(int[] asteroids) {
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for(int asteroid: asteroids) {
+            if(asteroid > 0) {
+                stack.push(asteroid);
+            }
+            else {
+                while(!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -asteroid) {
+                    stack.pop();
+                }
+                if(stack.isEmpty() || stack.peek() < 0) {
+                    stack.push(asteroid);
+                }
+                if(stack.peek() == -asteroid) {
+                    stack.pop();
+                }
+            }
+        }
+
+        int[] res = new int[stack.size()];
+        int i=stack.size()-1;
+
+        while(!stack.isEmpty()) {
+            res[i--] = stack.pop();
+        }
+        return res;
+    }
+
+    public String decodeString(String s) {
+        Deque<Integer> numberStack = new ArrayDeque<>();
+        Deque<String> sbStack = new ArrayDeque<>();
+        StringBuilder currSb = new StringBuilder();
+        int num=0;
+
+        for(char c: s.toCharArray()) {
+            if(Character.isDigit(c)) {
+                num = num*10+(c-'0');
+            } else if(c == '[') {
+                numberStack.push(num);
+                sbStack.push(currSb.toString());
+                num=0;
+                currSb = new StringBuilder();
+            } else if (c == ']') {
+                int count = numberStack.pop();
+                StringBuilder tempSb = new StringBuilder(sbStack.pop());
+                while(count > 0) {
+                    tempSb.append(currSb);
+                    count--;
+                }
+                currSb = tempSb;
+            } else {
+                currSb.append(c);
+            }
+        }
+        return currSb.toString();
+
+    }
 }

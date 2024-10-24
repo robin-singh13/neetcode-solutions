@@ -206,6 +206,104 @@ public class NeetCodeSolutionsArray {
         return Math.max(currentSequence,maxSequence);
     }
 
+    public String gcdOfStrings(String str1, String str2) {
+        if(str1+str2 != str2+str1) {
+            return "";
+        }
+        int gcdBase = gcdOfLength(str1.length(),str2.length());
 
+        return str1.substring(0,gcdBase-1);
+    }
+
+    private int gcdOfLength(int a, int b) {
+        if(a == b) {
+            return a;
+        }
+        if(a > b) {
+           return gcdOfLength(a-b,b);
+        }
+        return gcdOfLength(a,b-a);
+    }
+
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        int max = -1;
+        for(int n: candies) {
+            if(n > max) {
+                max = n;
+            }
+        }
+        List<Boolean> result = new ArrayList<>();
+        for(int i=0; i<candies.length; i++) {
+            if(candies[i]+extraCandies >= max) {
+                result.add(true);
+            } else {
+                result.add(false);
+            }
+        }
+        return result;
+    }
+
+    public String reverseWords(String s) {
+        String[] words = s.split(" ");
+        String output = new String();
+        for(int i=words.length-1; i>=0; i++) {
+            if(words[i].length() > 0) {
+                output += words[i] + " ";
+            }
+        }
+        return output.trim();
+    }
+
+    public boolean increasingTriplet(int[] nums) {
+        int low = Integer.MAX_VALUE;
+        int mid = Integer.MAX_VALUE;
+        int lowIndex=0;
+        int midIndex=0;
+
+        for(int i=1; i<nums.length; i++) {
+           if(nums[i]<low) {
+               low = nums[i];
+               lowIndex=i;
+
+           } else if(nums[i]>low && nums[i]<mid) {
+               mid=nums[i];
+               midIndex=i;
+           } else if(nums[i] > mid & midIndex>lowIndex && i>midIndex) {
+               return true;
+           }
+
+        }
+        return false;
+    }
+
+    public int compress(char[] chars) {
+        char lastChar=chars[0];
+        int length=0;
+        int index=1;
+        for(char c: chars ) {
+            if(c==lastChar) {
+                length++;
+            }
+            else if(c!=lastChar) {
+                if(length > 1) {
+                    for(char num: String.valueOf(length).toCharArray()) {
+                        chars[index] = num;
+                        index++;
+                    }
+                }
+                lastChar = c;
+                length=1;
+                chars[index] = lastChar;
+                index++;
+            }
+        }
+        if(length > 1) {
+            for(char num: String.valueOf(length).toCharArray()) {
+                chars[index] = num;
+                index++;
+            }
+        }
+        return index;
+    }
 
 }

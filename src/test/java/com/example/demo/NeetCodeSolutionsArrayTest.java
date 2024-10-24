@@ -55,4 +55,16 @@ public class NeetCodeSolutionsArrayTest {
         int [] nums = {2,20,4,10,3,4,5};
         System.out.println(neetCodeSolutionsArray.longestConsecutive(nums));
     }
+
+    @Test
+    public void sanityStringGCD() {
+        System.out.println(neetCodeSolutionsArray.gcdOfStrings("ABCABCABC","ABCABC"));
+    }
+
+    @Test
+    public void sanityCompress() {
+        char[] input = new char[]{'a','a','b','b','c','c','c'};
+        System.out.println(neetCodeSolutionsArray.compress(input));
+        System.out.println(input);
+    }
 }

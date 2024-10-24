@@ -21,4 +21,31 @@ public class NeetCodeSolutionsTwoPointersTest {
         int[] nums = {0,0,0,0};
         System.out.println(neetCodeSolutionTwoPointers.threeSum(nums));
     }
+
+    @Test
+    public void sanityMoveZeroes() {
+        int[] nums = {1};
+        neetCodeSolutionTwoPointers.moveZeroes(nums);
+        System.out.println(nums);
+    }
+
+    @Test
+    public void sanityIsSubsequence() {
+        System.out.println(neetCodeSolutionTwoPointers.isSubsequence("b","abc"));
+    }
+
+    @Test
+    public void sanityMaxArea() {
+        System.out.println(neetCodeSolutionTwoPointers.maxArea(new int[]{1,8,6,2,5,4,8,3,7}));
+    }
+
+    @Test
+    public void sanityMaxOperations() {
+        System.out.println(neetCodeSolutionTwoPointers.maxOperations(new int[]{1,2,3,4},5));
+    }
+
+    @Test
+    public void swapVowels(){
+        System.out.println(neetCodeSolutionTwoPointers.reverseVowels("leetcode"));
+    }
 }
